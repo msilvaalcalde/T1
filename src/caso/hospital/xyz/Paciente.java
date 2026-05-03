@@ -99,6 +99,22 @@ public class Paciente {
     {
         return Period.between(fechaNacimiento, LocalDate.now()).getYears();
     }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
     
     public String mostrarDatos()
     {
