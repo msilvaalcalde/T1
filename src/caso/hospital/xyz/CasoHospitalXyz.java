@@ -5,6 +5,8 @@
 package caso.hospital.xyz;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -21,7 +23,7 @@ public class CasoHospitalXyz {
         Scanner sca = new Scanner(System.in);// creamos la variable sca para leer datos desde consola
         controlPaciente control=new controlPaciente();
         
-        String rpta= "SI/NO";
+        String rpta= "SI";
         while(rpta.equalsIgnoreCase("SI"))
         {
         try
@@ -56,8 +58,23 @@ public class CasoHospitalXyz {
                 System.out.println("Tipo de sangre: ");
                 String tipoSangre=sca.nextLine();
 
-                System.out.println("Alergias: ");
-                String alergias=sca.nextLine();
+                String respuestaAlergias = "s";
+                List<String> alergiasTemporal = new ArrayList<>();
+                while(respuestaAlergias.equalsIgnoreCase("s"))
+                {
+                    System.out.println("ingrese alergia");
+                    String alergia = sca.nextLine();
+                    if (alergia.isEmpty())
+                    {
+                        throw new Exception("Error: Debe registrar alergias.");
+                    }
+                    else
+                    {
+                        alergiasTemporal.add(alergia);
+                    }
+                    System.out.println("Desea agregar mas alergia?(s/n)");
+                    respuestaAlergias = sca.nextLine();
+                }
 
                 System.out.println("Celular: ");
                 String celular=sca.nextLine();
@@ -85,16 +102,13 @@ public class CasoHospitalXyz {
                 p.setNroIndentificacion(nroDocumento);
                 p.setFechaNacimiento(fechaNacimiento);
                 p.setTipoSangre(tipoSangre);
-                p.setAlergias(alergias);
+                p.setAlergias(alergiasTemporal);
                 p.setCelular(celular);
                 p.setCorreo(correo);
 
                 control.agregarPacientes(p);
 
                 System.out.println("Paciente registrado con exito. ");
-
-
-
 
             } catch(Exception e)
             {
@@ -106,19 +120,7 @@ public class CasoHospitalXyz {
         
         }
         System.out.println("\n =------Lista de Pacientes------");
-        control.listarPaciente();
-        
-        sc.close();
-        
-        
-        }
-        
-        
-        
-        
-        
-        
-        
+        control.listarPacientes();
+        sca.close();
     }
-    
 }
